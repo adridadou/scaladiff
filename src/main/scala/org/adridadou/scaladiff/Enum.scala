@@ -1,4 +1,4 @@
-package net.ironforged.scaladiff
+package org.adridadou.scaladiff
 
 trait Enum {
 
@@ -19,7 +19,7 @@ trait Enum {
   }
 
   private var _values = Map.empty[Int, U]
-  def values = _values.toSeq.sortBy(_._1)
+  def values: Seq[(Int, U)] = _values.toSeq.sortBy(_._1)
 
   def apply(x: Int): Option[U] = {
     _values.find(v => v._1 == x).map(_._2)

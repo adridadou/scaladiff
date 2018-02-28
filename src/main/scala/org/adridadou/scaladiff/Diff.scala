@@ -1,7 +1,7 @@
-package net.ironforged.scaladiff
+package org.adridadou.scaladiff
 
-import net.ironforged.scaladiff.commons._
-import net.ironforged.scaladiff.OperationType._
+import org.adridadou.scaladiff.commons._
+import org.adridadou.scaladiff.OperationType._
 
 case class Diff(original: String, modified: String, diffs: List[Operation]) {
 
@@ -139,7 +139,7 @@ object Diff {
          * +A-BX-C
          */
         val bools = Seq(preInsert, preDelete, postInsert, postDelete)
-        if (!lastEquality.isEmpty && (bools.forall(b=>b) || ((lastEquality.length < MAX_EDIT_COST / 2) && bools.filter(b=>b).length == 3))) {
+        if (!lastEquality.isEmpty && (bools.forall(b=>b) || ((lastEquality.length < MAX_EDIT_COST / 2) && bools.count(b => b) == 3))) {
           // Duplicate record
           // Change second copy to insert
           buffer     = replace(buffer, equalities.last, 1)(Operation(Delete, lastEquality), Operation(Insert, lastEquality))
@@ -152,7 +152,7 @@ object Diff {
             equalities = List.empty[Int]
           }
           else {
-            if (!equalities.isEmpty) {
+            if (equalities.nonEmpty) {
               equalities   = equalities.dropRight(1) // Throw away previous equality
               currentIndex = equalities.lastOption.getOrElse(-1)
             }
@@ -182,17 +182,15 @@ object Diff {
 
     while (currentIndex < buffer.length) {
       buffer(currentIndex).op match {
-        case Insert => {
+        case Insert =>
           inserts      += 1
           inserted     += buffer(currentIndex).text
           currentIndex += 1
-        }
-        case Delete => {
+        case Delete =>
           deletes      += 1
           deleted      += buffer(currentIndex).text
           currentIndex += 1
-        }
-        case Equals => {
+        case Equals =>
           // Upon reaching an equality, check for prior redundancies
           if (deletes + inserts > 1) {
             if (deletes != 0 && inserts != 0) {
@@ -252,7 +250,6 @@ object Diff {
           deletes  = 0
           inserted = ""
           deleted  = ""
-        }
       }
     }
 
@@ -307,16 +304,16 @@ object Diff {
    */
   private def lcs(a: String, b: String): String = {
     // Empty pair of strings? No LCS...
-    if (a.size == 0 || b.size == 0) { return "" }
+    if (a.isEmpty || b.isEmpty) { "" }
     else {
       // Same string? LCS is the string itself..
-      if (a == b) { return a }
+      if (a == b) { a }
       else {
         // Construct the LCS matrix using the lengths of the subsequences,
         // this is done to reduce the memory needed to solve the problem
-        val lengths = Array.ofDim[Int](a.size + 1,b.size + 1)
-        for (i <- 0 until a.size) {
-          for (j <- 0 until b.size) {
+        val lengths = Array.ofDim[Int](a.length + 1,b.length + 1)
+        for (i <- 0 until a.length) {
+          for (j <- 0 until b.length) {
             if (a(i) == b(j)) {
               lengths(i + 1)(j + 1) = lengths(i)(j) + 1
             }
@@ -328,7 +325,7 @@ object Diff {
 
         // Starting from the last cell in the matrix, trace back towards the origin, accumulating commonalities
         val builder = new StringBuilder()
-        var (x, y) = (a.size, b.size)
+        var (x, y) = (a.length, b.length)
         do {
           if      (lengths(x)(y) == lengths(x - 1)(y)) { x -= 1 }
           else if (lengths(x)(y) == lengths(x)(y - 1)) { y -= 1 }

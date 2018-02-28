@@ -1,4 +1,4 @@
-package net.ironforged.scaladiff
+package org.adridadou
 
 package object commons {
   /**
@@ -36,10 +36,10 @@ package object commons {
    */
   def slice(s: String, start: Int, length: Int = Int.MinValue): String = {
     val len = if (length == Int.MinValue) s.length - start else length
-    if (s == null)                    return ""
-    else if (start < 0 || len < 0)    return ""
-    else if (start > s.length)        return ""
-    else if (len >= s.length - start) return s.substring(start)
+    if (s == null)                    ""
+    else if (start < 0 || len < 0)    ""
+    else if (start > s.length)        ""
+    else if (len >= s.length - start) s.substring(start)
     else                              s.substring(start, start + len)
   }
 
@@ -50,9 +50,9 @@ package object commons {
    * @return String
    */
   def sliceLeft(s: String, x: Int): String = {
-    if (s == null)          return ""
-    else if (x <= 0)        return ""
-    else if (x > s.length)  return s
+    if (s == null)          ""
+    else if (x <= 0)        ""
+    else if (x > s.length)  s
     else                    s.substring(0, x)
   }
 
@@ -63,9 +63,9 @@ package object commons {
    * @return String
    */
   def sliceRight(s: String, x: Int): String = {
-    if (s == null)         return ""
-    else if (x <= 0)       return ""
-    else if (x > s.length) return s
+    if (s == null)         ""
+    else if (x <= 0)       ""
+    else if (x > s.length) s
     else                   s.substring(s.length - x)
   }
 }

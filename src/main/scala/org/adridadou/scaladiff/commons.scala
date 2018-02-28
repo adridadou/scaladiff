@@ -1,4 +1,4 @@
-package org.adridadou
+package org.adridadou.scaladiff
 
 package object commons {
   /**

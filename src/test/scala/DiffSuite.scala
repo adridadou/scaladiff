@@ -1,6 +1,6 @@
 import org.scalatest.{FunSuite, Matchers, PrivateMethodTester}
-import net.ironforged.scaladiff._
-import net.ironforged.scaladiff.OperationType._
+import org.adridadou.scaladiff._
+import org.adridadou.scaladiff.OperationType._
 
 class DiffSuite extends FunSuite with PrivateMethodTester  with Matchers{
   val original = "bills boards"

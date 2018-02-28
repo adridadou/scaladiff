@@ -1,5 +1,5 @@
 import org.scalatest.{FunSuite, Matchers}
-import net.ironforged.scaladiff.commons._
+import org.adridadou.scaladiff.commons._
 
 class CommonsSuite extends FunSuite with Matchers{
   test("can insert an element in a list at the desired position") {

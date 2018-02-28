@@ -1,6 +1,6 @@
 import org.scalatest.{FunSuite, Matchers}
-import net.ironforged.scaladiff.Operation
-import net.ironforged.scaladiff.OperationType._
+import org.adridadou.scaladiff.Operation
+import org.adridadou.scaladiff.OperationType._
 
 class OperationsSuite extends FunSuite with Matchers {
   test("a stringified Operation reflects it's logical diff representation") {

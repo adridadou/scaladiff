@@ -1,5 +1,5 @@
 import org.scalatest.{FunSuite, Matchers}
-import net.ironforged.scaladiff._
+import org.adridadou.scaladiff._
 
 class IntegrationSuite extends FunSuite with Matchers{
   test("simple sentence modification produces the expected diff") {

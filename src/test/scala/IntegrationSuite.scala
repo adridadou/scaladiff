@@ -1,9 +1,7 @@
-import org.scalatest.FunSuite
-import org.scalatest.matchers.ShouldMatchers._
-
+import org.scalatest.{FunSuite, Matchers}
 import net.ironforged.scaladiff._
 
-class IntegrationSuite extends FunSuite {
+class IntegrationSuite extends FunSuite with Matchers{
   test("simple sentence modification produces the expected diff") {
     val original = "bills boards"
     val modified = "bills swords"

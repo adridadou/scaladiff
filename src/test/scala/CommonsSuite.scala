@@ -1,9 +1,7 @@
-import org.scalatest.FunSuite
-import org.scalatest.matchers.ShouldMatchers._
-
+import org.scalatest.{FunSuite, Matchers}
 import net.ironforged.scaladiff.commons._
 
-class CommonsSuite extends FunSuite {
+class CommonsSuite extends FunSuite with Matchers{
   test("can insert an element in a list at the desired position") {
     var li = List(1, 2, 3, 4)
     li = insert(li, 2)(80)

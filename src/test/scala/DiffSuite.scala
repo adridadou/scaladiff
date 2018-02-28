@@ -1,10 +1,8 @@
-import org.scalatest.{FunSuite, PrivateMethodTester}
-import org.scalatest.matchers.ShouldMatchers._
-
+import org.scalatest.{FunSuite, Matchers, PrivateMethodTester}
 import net.ironforged.scaladiff._
 import net.ironforged.scaladiff.OperationType._
 
-class DiffSuite extends FunSuite with PrivateMethodTester {
+class DiffSuite extends FunSuite with PrivateMethodTester  with Matchers{
   val original = "bills boards"
   val modified = "bills swords"
   val longestCommon = "bills ords"

@@ -1,10 +1,8 @@
-import org.scalatest.FunSuite
-import org.scalatest.matchers.ShouldMatchers._
-
+import org.scalatest.{FunSuite, Matchers}
 import net.ironforged.scaladiff.Operation
 import net.ironforged.scaladiff.OperationType._
 
-class OperationsSuite extends FunSuite {
+class OperationsSuite extends FunSuite with Matchers {
   test("a stringified Operation reflects it's logical diff representation") {
     val equalsOp = Operation(Equals, "things")
     val insertOp = Operation(Insert, "stuff")
